@@ -1,0 +1,20 @@
+const MongoClient = require("mongodb").MongoClient;
+const assert = require("assert");
+
+const url =
+  "mongodb+srv://pridallyapp:Pridallyhealth@pridally.q6ckojx.mongodb.net/?retryWrites=true&w=majority";
+const dbName = "pridally";
+
+const db = function (callback) {
+  MongoClient.connect(
+    url,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    function (err, client) {
+      assert.equal(null, err);
+      const db = client.db(dbName);
+      callback(db, client);
+    }
+  );
+};
+
+module.exports = { db };
